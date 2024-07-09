@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      <h1>Welcome to FriendBook App</h1>
+     
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage/>} />

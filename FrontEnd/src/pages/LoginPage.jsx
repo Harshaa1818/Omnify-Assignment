@@ -8,7 +8,7 @@ const LoginPage = () =>{
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [isloggenIn, setIsloggenIn] = useState(false)
+    //const [isloggenIn, setIsloggenIn] = useState(false)
 
     const handleSubmit = () =>{
 
@@ -16,22 +16,15 @@ const LoginPage = () =>{
 
         if(username === '' || password === '') return alert('Please fill in all fields')
 
-        axios.post('http://localhost:3001/login', {
-            username: username,
+        axios.post('http://localhost:3000/api/v1/user/login', {
+            email: username,
             password: password
         })
-        .then((response)=>{
-            console.log(response)
-            if(response.data.message){
-                setIsloggenIn(false)
-                alert(response.data.message)
-            }else{
-                setIsloggenIn(true)
-                alert('Login Successful')
-            }
-            setTimeout(()=>{
-                window.location.href = '/UserLandingPage'
-            })
+        .then((res)=>{
+            alert('Login Successful')
+            window.location.href='/UserLandingPage';
+            document.cookie.name=`token'=${res.cookie.AccessToken}`
+            
         })
         .catch((error)=>{
             console.log(error)
