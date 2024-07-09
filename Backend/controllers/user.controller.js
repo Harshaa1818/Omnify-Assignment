@@ -53,8 +53,8 @@ const login=async(req,res)=>{
     
         return res
         .status(201)
-        .cookie("Access Token:", AccessToken, options )
-        .json({message:"Log In sucessful"})
+       // .cookie("AccessToken", AccessToken, options )
+        .json({message:"Log In sucessful", AccessToken:AccessToken})
     } 
     
     catch (error) {
@@ -115,6 +115,19 @@ catch(err){
 }
 
 const friendList=(req,res)=>{
+    try{
+        const userId=req.id;
+
+        User.find()
+
+        
+
+    }
+    catch(err){
+        return res
+        .status(500)
+        .json({message:"Internal server error"})
+    }
 
 }
 

@@ -22,8 +22,10 @@ const LoginPage = () =>{
         })
         .then((res)=>{
             alert('Login Successful')
-            window.location.href='/UserLandingPage';
-            document.cookie.name=`token'=${res.cookie.AccessToken}`
+            const token=res.data.AccessToken
+            //console.log(token)
+            document.cookie=`token=${token}`
+            window.location.href='/UserLandingPage'
             
         })
         .catch((error)=>{

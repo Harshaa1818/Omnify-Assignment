@@ -5,7 +5,7 @@ import verifyJWT  from "../auth.js";
 
 const router = Router();
 
-router.route('/userHomePage').get(verifyJWT,homepage)
+//router.route('/userHomePage').get(verifyJWT,homepage)
 router.route('/login').post(login)
 router.route('/register').post(register)
 router.route('/friendList').get(verifyJWT,friendList)
