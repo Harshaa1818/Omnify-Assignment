@@ -1,13 +1,10 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
 
 
-const userschema=mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-    },
+const userschema=new mongoose.Schema({
+   
     email:{
         type:String,
         required:true
@@ -18,19 +15,29 @@ const userschema=mongoose.Schema({
     }
 },{timestamps:true})
 
-userschema.methods.GenerateAccessToken=()=>{
-    return jwt.sign({id:this.id},process.env.JWT_SECRET,{expiresIn:'1d'})
+const key="Harshal"
+
+userschema.methods.GenerateAccessToken= function(){
+    return  jwt.sign({ _id:this._id },key,{expiresIn:'1d'})
 }
 
-userschema.ComparePassword=(password)=>{
-   return bcrypt.compare(this.password,password)
-    
+userschema.methods.isPasswordCorrect = async function(password){
+    return await bcrypt.compare(password, this.password)
 }
-userschema.pre("save",()=>{
-    if(isModified("password")){
-         return bcrypt.hash(this.password,10)
 
+
+
+
+
+
+
+userschema.pre("save",async function(next){
+    if(!this.isModified("password")){
+         return next()
     }
+    
+    this.password=await bcrypt.hash(this.password,10)
+    next()
 })
 
-export const User=new mongoose.model('User',userschema);
+export const User=mongoose.model('User',userschema);
