@@ -60,3 +60,25 @@
   color: white;
   cursor: pointer;
 }
+.card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height:200px;
+  width: 300px;
+  border: solid 1px ;
+  margin: 10px;
+}
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+}
+.header button{
+  width: max-content;
+  height: fit-content;
+}

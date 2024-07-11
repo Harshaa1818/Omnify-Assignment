@@ -114,12 +114,16 @@ catch(err){
 }
 }
 
-const friendList=(req,res)=>{
+const getAllUsers=async(req,res)=>{
     try{
-        const userId=req.id;
+        
+      const user=await  User.find({})
 
-        User.find()
+      return res
+        .status(200)
+        .json({message:"All users",user})
 
+        
         
 
     }
@@ -131,4 +135,82 @@ const friendList=(req,res)=>{
 
 }
 
-export {homepage,login,register,friendList}
+const addFriend=async(req,res)=>{
+    try{
+        const userId=req.id;
+       // console.log(userId);
+       //console.log(user);
+
+        const friendId=req.body.friendId;
+       // console.log(friendId);
+
+         const user=await User.findById(userId);
+
+         const friend=await User.findById(friendId);
+
+         //console.log(friend);
+        
+            user.friends.push(friend);
+
+            await user.save();
+
+            //console.log(user);
+
+
+         
+
+            //await user.friends.push(friend);
+         
+
+            //await user.save();
+
+         return res.status(200).json({message:"Friend added successfully"})
+    }
+    catch(err){
+        return res
+        .status(500)
+        .json({message:"Internal server error"})
+    }
+
+}
+
+const logout=async(req,res)=>{
+    try{
+        res.clearCookie("AccessToken")
+        return res
+        .status(200)
+        .json({message:"Logout successful"})
+    }
+    catch(err){
+        return res
+        .status(500)
+        .json({message:"Internal server error"})
+    }
+}
+
+const generateToken=async(req,res)=>{
+try{
+    const email =req.body.email;
+    const user=await User.findOne({ "email": email })
+    
+    const token= user.GenerateAccessToken();
+
+    console.log(token);
+
+    
+
+    
+
+    return res
+    .status(200)
+    .json({token});
+}
+catch(err){
+    return res
+    .status(500)
+    .json({message:"Internal server error"})
+
+}
+}
+
+export {homepage,login,register,getAllUsers, addFriend, logout, generateToken}
