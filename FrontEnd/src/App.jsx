@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage.jsx'
 import Register from './pages/Register'
 import UserLandingPage from './pages/UserLandingPage'
+import FriendList from './pages/FriendList'
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<Register />} />
-        <Route path='UserLandingPage' element={<UserLandingPage/>} />
+        <Route path='/UserLandingPage' element={<UserLandingPage/>} />
+        <Route path='/FriendList' element={<FriendList/>} />
       
       </Routes>
       

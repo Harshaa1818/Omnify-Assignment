@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { homepage, login, register, getAllUsers,addFriend, logout, generateToken } from "../controllers/user.controller.js";
+import { login, register, getAllUsers,addFriend, logout, generateToken, getFriendList } from "../controllers/user.controller.js";
 import verifyJWT  from "../auth.js";
 
 
@@ -11,6 +11,7 @@ router.route('/logout').get(verifyJWT,logout)
 router.route('/addFriend').post(verifyJWT,addFriend)
 router.route('/getAllUsers').get(getAllUsers)
 router.route('/generateToken').get(generateToken)
+router.route('/getFriendList').post(verifyJWT,getFriendList)
 
 
 export default router;

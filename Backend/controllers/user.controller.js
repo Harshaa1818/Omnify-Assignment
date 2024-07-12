@@ -134,6 +134,24 @@ const getAllUsers=async(req,res)=>{
     }
 
 }
+const getFriendList=async(req,res)=>{
+    try{
+        const userId=req.id;
+
+        const user=await User.findById(userId);
+        const friends=user.friends;
+
+
+        return res
+        .status(200)
+        .json({message:"All friends", friends})
+    }
+    catch(err){
+        return res
+        .status(500)
+        .json({message:"Internal server error"})
+    }
+}
 
 const addFriend=async(req,res)=>{
     try{
@@ -148,7 +166,7 @@ const addFriend=async(req,res)=>{
 
          const friend=await User.findById(friendId);
 
-         //console.log(friend);
+         console.log(friend);
         
             user.friends.push(friend);
 
@@ -164,7 +182,7 @@ const addFriend=async(req,res)=>{
 
             //await user.save();
 
-         return res.status(200).json({message:"Friend added successfully"})
+         return res.status(200).json({message:"Friend added successfully",user})
     }
     catch(err){
         return res
@@ -213,4 +231,4 @@ catch(err){
 }
 }
 
-export {homepage,login,register,getAllUsers, addFriend, logout, generateToken}
+export {homepage,login,register,getAllUsers, addFriend, logout, generateToken, getFriendList}
