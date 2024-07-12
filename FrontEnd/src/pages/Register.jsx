@@ -13,7 +13,7 @@ const Register=()=>{
         })
         .then(()=>{
             alert('Registration Successful')
-            window.location.href='/homepage'
+            window.location.href='/login'
         
         })
         .catch((error)=>{

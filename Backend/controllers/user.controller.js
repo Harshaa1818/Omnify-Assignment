@@ -141,10 +141,29 @@ const getFriendList=async(req,res)=>{
         const user=await User.findById(userId);
         const friends=user.friends;
 
+        console.log(friends);
+
 
         return res
         .status(200)
         .json({message:"All friends", friends})
+    }
+    catch(err){
+        return res
+        .status(500)
+        .json({message:"Internal server error"})
+    }
+}
+const getUserById=async(req,res)=>{
+    try{
+        const userId=req.params.userId;
+
+        
+        const user= await User.findById(userId)
+
+        return res
+        .status(200)
+        .json({user})
     }
     catch(err){
         return res
@@ -166,9 +185,12 @@ const addFriend=async(req,res)=>{
 
          const friend=await User.findById(friendId);
 
-         console.log(friend);
+         let obj={}
+         obj._id=friend._id;
+         obj.email=friend.email;
+
         
-            user.friends.push(friend);
+            user.friends.push(obj);
 
             await user.save();
 
@@ -231,4 +253,4 @@ catch(err){
 }
 }
 
-export {homepage,login,register,getAllUsers, addFriend, logout, generateToken, getFriendList}
+export {homepage,login,register,getAllUsers, addFriend, logout, generateToken, getFriendList, getUserById}

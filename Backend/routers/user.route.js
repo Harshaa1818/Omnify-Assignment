@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { login, register, getAllUsers,addFriend, logout, generateToken, getFriendList } from "../controllers/user.controller.js";
+import { login, register, getAllUsers,addFriend, logout, generateToken, getFriendList, getUserById } from "../controllers/user.controller.js";
 import verifyJWT  from "../auth.js";
+import { get } from "mongoose";
 
 
 const router = Router();
@@ -12,6 +13,7 @@ router.route('/addFriend').post(verifyJWT,addFriend)
 router.route('/getAllUsers').get(getAllUsers)
 router.route('/generateToken').get(generateToken)
 router.route('/getFriendList').post(verifyJWT,getFriendList)
+router.route('/getUserById/:userId').get(getUserById)
 
 
 export default router;

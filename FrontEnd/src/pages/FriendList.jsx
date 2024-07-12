@@ -6,28 +6,52 @@ import '../App.css'
 
     const FriendList = () => {
 
-        const [friends,setFriends]=useState([])
+        const [friendsId,setFriendsId]=useState([])
+       
         
        useEffect(()=>{
         axios.post("http://localhost:3000/api/v1/user/getFriendList",{token:document.cookie})
         .then((res)=>{
-            setFriends((prev)=>[...prev,res.data.friends])
+            
+            setFriendsId(res.data.friends)
+            
 
         })
         .catch((err)=>{
             console.log(err)
         })
        },[])
+       console.log(friendsId)
+
+        //  useEffect(()=>{
+        //     friendsId.map((friend)=>{
+        
+        
+        //         axios.get(`http://localhost:3000/api/v1/user/getUserById/:${friend}`)
+        //         .then((res)=>{
+        //             console.log(res.data)
+        //             setFriends((prev)=>[...prev,res.data])
+        //         })
+        //         .catch((err)=>{
+        //             console.log(err)
+        //        })
+        //     })
+        //  })
 
         return (
             <div>
                 <h1>Friend List</h1>
-                {friends.map((friend)=>(
-                    friend && <div key={friend._id} className='card'>
-                    <h2>{friend}</h2>
-                    
-                    </div>
-                ))}
+                <div className="Fheader">
+                {friendsId.map((friend)=>{
+                    return(
+                        <div className="friendcard">
+                            <h2>{friend}</h2>
+                            
+                        </div>
+                    )
+                })}
+                </div>
+                
                 
             </div>
         );

@@ -82,3 +82,15 @@
   width: max-content;
   height: fit-content;
 }
+.Fheader{
+  display: flex;
+  flex-flow: column;
+  gap: 20px;
+ 
+ 
+}
+.friendcard{
+  border: solid 1px;
+  padding: 30px;
+  
+}
