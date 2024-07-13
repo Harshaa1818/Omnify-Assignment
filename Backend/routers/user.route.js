@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { login, register, getAllUsers,addFriend, logout, generateToken, getFriendList, getUserById } from "../controllers/user.controller.js";
 import verifyJWT  from "../auth.js";
-import { get } from "mongoose";
+
 
 
 const router = Router();
